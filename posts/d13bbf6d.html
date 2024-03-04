@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>NEO4J安装 | Capybarato</title><meta name="author" content="Capybara"><meta name="copyright" content="Capybara"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="下载下载地址：https:&#x2F;&#x2F;neo4j.com&#x2F;deployment-center&#x2F; 选择版本号及你的操作系统 下载 需要注意neo4j 5对应jdk17，neo4j 4对应jdk11。对应jdk版本下，也可以重装jdk。 win R- cmd- java -version查看java版本   下载后在某路径下解压即可   配置环境变量系统环境变量中   Path中新增一条   确定-确定-确定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NEO4J安装">
+<meta property="og:url" content="https://capybarato.github.io/posts/d13bbf6d.html">
+<meta property="og:site_name" content="Capybarato">
+<meta property="og:description" content="下载下载地址：https:&#x2F;&#x2F;neo4j.com&#x2F;deployment-center&#x2F; 选择版本号及你的操作系统 下载 需要注意neo4j 5对应jdk17，neo4j 4对应jdk11。对应jdk版本下，也可以重装jdk。 win R- cmd- java -version查看java版本   下载后在某路径下解压即可   配置环境变量系统环境变量中   Path中新增一条   确定-确定-确定">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://capybarato.github.io/img/neo4j.png">
+<meta property="article:published_time" content="2023-11-27T04:13:17.000Z">
+<meta property="article:modified_time" content="2024-03-04T10:32:29.716Z">
+<meta property="article:author" content="Capybara">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://capybarato.github.io/img/neo4j.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://capybarato.github.io/posts/d13bbf6d.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'NEO4J安装',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-04 18:32:29'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading.gif" data-original="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/neo4j.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Capybarato"><span class="site-name">Capybarato</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">NEO4J安装</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-27T04:13:17.000Z" title="发表于 2023-11-27 12:13:17">2023-11-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-04T10:32:29.716Z" title="更新于 2024-03-04 18:32:29">2024-03-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="NEO4J安装"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>下载地址：<a target="_blank" rel="noopener" href="https://neo4j.com/deployment-center/">https://neo4j.com/deployment-center/</a></p>
+<p>选择版本号及你的操作系统 下载</p>
+<p>需要注意neo4j 5对应jdk17，neo4j 4对应jdk11。对应jdk版本下，也可以重装jdk。</p>
+<p>win R- cmd- java -version查看java版本</p>
+<img src="/img/loading.gif" data-original="/images/image-20231127115632458.png" alt="image-20231127115632458" style="zoom:50%;" />
+
+<p>下载后在某路径下解压即可</p>
+<img src="/img/loading.gif" data-original="/images/image-20231127115811701.png" alt="image-20231127115811701" style="zoom:50%;" />
+
+<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p>系统环境变量中</p>
+<img src="/img/loading.gif" data-original="D:\aGuoJ\blog\source\_posts\image-20231127115906495.png" alt="image-20231127115906495" style="zoom:50%;" />
+
+<p>Path中新增一条</p>
+<img src="/img/loading.gif" data-original="/images/image-20231127115934642.png" alt="image-20231127115934642" style="zoom:50%;" />
+
+<p>确定-确定-确定</p>
+<h3 id="启动neo4j"><a href="#启动neo4j" class="headerlink" title="启动neo4j"></a>启动neo4j</h3><p>在bin目录下，文件路径栏输入cmd回车。（即：在该目录下，进入管理员命令模式。）</p>
+<p>输入</p>
+<pre><code>neo4j.bat console
+</code></pre>
+<p>如果报错</p>
+<blockquote>
+<p>A <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=JNI&spm=1001.2101.3001.7020">JNI</a> error has occurred, please check your installation and try again.</p>
+</blockquote>
+<p>就是neo4j和jdk的版本不对应。</p>
+<p>显示如下则启动成功</p>
+<img src="/img/loading.gif" data-original="/images/image-20231127120311234.png" alt="image-20231127120311234" style="zoom:50%;" />
+
+<p>可以在浏览器中输入localhost:7474打开。默认账号和密码均为：neo4j。首次登录会提醒修改密码。打开就能看见自己的图数据库了。</p>
+<p>如果你跟我一样jdk用的8，需要卸载重装。</p>
+<p>jdk卸载：</p>
+<p>首先环境变量中删除JAVA_HOME以及Path当中的java bin及 java jre等的设置。</p>
+<p>然后通过控制面板卸载程序删除，应该是有两个东西，JAVA SE开头和JAVA update 右键卸载。</p>
+<p>jdk17安装：</p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/downloads/#jdk17-windows">https://www.oracle.com/java/technologies/downloads/#jdk17-windows</a></p>
+<p>下载installer一路下一步即可。</p>
+<p>配置环境变量</p>
+<p>配置JAVA_HOME</p>
+<img src="/img/loading.gif" data-original="/images/image-20231127120819376.png" alt="image-20231127120819376" style="zoom:50%;" />
+
+<p>配置Path</p>
+<img src="/img/loading.gif" data-original="/images/image-20231127120844370.png" alt="image-20231127120844370" style="zoom:50%;" />
+
+<p>如果你也需要jre</p>
+<p>刚安装完的目录下是没有jre的，需要在路径下右键打开powershell窗口执行命令：</p>
+<pre><code>bin\jlink.exe --module-path jmods --add-modules java.desktop --output jre
+</code></pre>
+<p>不会返回什么东西，然后文件里就会有jre了</p>
+<p>如上就重装jdk完成。</p>
+<h3 id="新建图"><a href="#新建图" class="headerlink" title="新建图"></a>新建图</h3><p>在最上栏输入代码即可</p>
+<p>如：</p>
+<pre><code>#增加一个节点
+create (n:Person &#123;name:&#39;我&#39;,age:33&#125;)  #有name，age两个属性
+#带有关系属性
+create (p:Person&#123;name:&quot;我&quot;,age:&quot;33&quot;&#125;)-[:包工程&#123;金额:10000&#125;]-&gt;(n:Person&#123;name:&quot;包工头&quot;,age:&quot;35&quot;&#125;)
+</code></pre>
+<p><img src="/img/loading.gif" data-original="/images/image-20231127120455805.png" alt="image-20231127120455805"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://capybarato.github.io">Capybara</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://capybarato.github.io/posts/d13bbf6d.html">https://capybarato.github.io/posts/d13bbf6d.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://capybarato.github.io" target="_blank">Capybarato</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/neo4j.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/posts/54dba225.html" title="爬虫+数据分析【day1】"><img class="cover" src="/img/loading.gif" data-original="/img/pa.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">爬虫+数据分析【day1】</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading.gif" data-original="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Capybara</div><div class="author-info__description">蒟蒻泰斯特</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/CapybaraTo" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:1023536640@qq.com@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD"><span class="toc-number">1.</span> <span class="toc-text">下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">2.</span> <span class="toc-text">配置环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8neo4j"><span class="toc-number">3.</span> <span class="toc-text">启动neo4j</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E5%9B%BE"><span class="toc-number">4.</span> <span class="toc-text">新建图</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/d13bbf6d.html" title="NEO4J安装"><img src="/img/loading.gif" data-original="/img/neo4j.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NEO4J安装"/></a><div class="content"><a class="title" href="/posts/d13bbf6d.html" title="NEO4J安装">NEO4J安装</a><time datetime="2023-11-27T04:13:17.000Z" title="发表于 2023-11-27 12:13:17">2023-11-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/54dba225.html" title="爬虫+数据分析【day1】"><img src="/img/loading.gif" data-original="/img/pa.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="爬虫+数据分析【day1】"/></a><div class="content"><a class="title" href="/posts/54dba225.html" title="爬虫+数据分析【day1】">爬虫+数据分析【day1】</a><time datetime="2023-10-30T14:07:29.000Z" title="发表于 2023-10-30 22:07:29">2023-10-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/3ff958bf.html" title="用vscode刷leetcode"><img src="/img/loading.gif" data-original="/img/vscode.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="用vscode刷leetcode"/></a><div class="content"><a class="title" href="/posts/3ff958bf.html" title="用vscode刷leetcode">用vscode刷leetcode</a><time datetime="2023-10-18T09:54:43.000Z" title="发表于 2023-10-18 17:54:43">2023-10-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/c442673f.html" title="搭建个人博客"><img src="/img/loading.gif" data-original="/img/hexo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="搭建个人博客"/></a><div class="content"><a class="title" href="/posts/c442673f.html" title="搭建个人博客">搭建个人博客</a><time datetime="2023-10-16T13:38:48.000Z" title="发表于 2023-10-16 21:38:48">2023-10-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/4a17b156.html" title="Hello World"><img src="/img/loading.gif" data-original="/img/hello-1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/posts/4a17b156.html" title="Hello World">Hello World</a><time datetime="2023-08-22T08:38:27.130Z" title="发表于 2023-08-22 16:38:27">2023-08-22</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/neo4j.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Capybara</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>
