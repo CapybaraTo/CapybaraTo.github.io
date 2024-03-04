@@ -1,0 +1,6 @@
+# hexo robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://capybarato.github.io/sitemap.xml
+Sitemap: https://capybarato.github.io/baidusitemap.xml
