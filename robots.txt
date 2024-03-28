@@ -1,6 +1,13 @@
-# hexo robots.txt
+# 允许所有用户代理的浏览器爬虫进行访问（爬取数据）
 User-agent: *
-Allow: /
+
+# 不允许访问的内容
+Disallow: /img/
+Disallow: /css/
+Disallow: /js/
+Disallow: /photos/
+Disallow: /*.css
+Disallow: /*.js
 
 Sitemap: https://capybarato.github.io/sitemap.xml
 Sitemap: https://capybarato.github.io/baidusitemap.xml
