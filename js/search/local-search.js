@@ -1,1 +1,270 @@
-"use strict";function _typeof2(e){return(_typeof2="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function _typeof(e){return(_typeof="function"==typeof Symbol&&"symbol"==_typeof2(Symbol.iterator)?function(e){return _typeof2(e)}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":_typeof2(e)})(e)}function _toConsumableArray(e){return _arrayWithoutHoles(e)||_iterableToArray(e)||_unsupportedIterableToArray(e)||_nonIterableSpread()}function _nonIterableSpread(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}function _iterableToArray(e){if("undefined"!=typeof Symbol&&null!=e[Symbol.iterator]||null!=e["@@iterator"])return Array.from(e)}function _arrayWithoutHoles(e){if(Array.isArray(e))return _arrayLikeToArray(e)}function _slicedToArray(e,t){return _arrayWithHoles(e)||_iterableToArrayLimit(e,t)||_unsupportedIterableToArray(e,t)||_nonIterableRest()}function _nonIterableRest(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}function _iterableToArrayLimit(e,t){var r=null==e?null:"undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(null!=r){var n,o,a,i,l=[],c=!0,s=!1;try{if(a=(r=r.call(e)).next,0===t){if(Object(r)!==r)return;c=!1}else for(;!(c=(n=a.call(r)).done)&&(l.push(n.value),l.length!==t);c=!0);}catch(e){s=!0,o=e}finally{try{if(!c&&null!=r.return&&(i=r.return(),Object(i)!==i))return}finally{if(s)throw o}}return l}}function _arrayWithHoles(e){if(Array.isArray(e))return e}function _createForOfIteratorHelper(e,t){var r,n,o,a,i="undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(i)return n=!(r=!0),{s:function(){i=i.call(e)},n:function(){var e=i.next();return r=e.done,e},e:function(e){n=!0,o=e},f:function(){try{r||null==i.return||i.return()}finally{if(n)throw o}}};if(Array.isArray(e)||(i=_unsupportedIterableToArray(e))||t&&e&&"number"==typeof e.length)return i&&(e=i),a=0,{s:t=function(){},n:function(){return a>=e.length?{done:!0}:{done:!1,value:e[a++]}},e:function(e){throw e},f:t};throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}function _unsupportedIterableToArray(e,t){var r;if(e)return"string"==typeof e?_arrayLikeToArray(e,t):"Map"===(r="Object"===(r=Object.prototype.toString.call(e).slice(8,-1))&&e.constructor?e.constructor.name:r)||"Set"===r?Array.from(e):"Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)?_arrayLikeToArray(e,t):void 0}function _arrayLikeToArray(e,t){(null==t||t>e.length)&&(t=e.length);for(var r=0,n=new Array(t);r<t;r++)n[r]=e[r];return n}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _defineProperties(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,_toPropertyKey(n.key),n)}}function _createClass(e,t,r){return t&&_defineProperties(e.prototype,t),r&&_defineProperties(e,r),Object.defineProperty(e,"prototype",{writable:!1}),e}function _toPropertyKey(e){return"symbol"==_typeof(e=_toPrimitive(e,"string"))?e:e+""}function _toPrimitive(e,t){if("object"!=_typeof(e)||!e)return e;var r=e[Symbol.toPrimitive];if(void 0===r)return("string"===t?String:Number)(e);if("object"!=_typeof(r=r.call(e,t||"default")))return r;throw new TypeError("@@toPrimitive must return a primitive value.")}var LocalSearch=_createClass(function e(t){var r=void 0===(r=t.path)?"":r,n=void 0!==(n=t.unescape)&&n,t=void 0===(t=t.top_n_per_article)?1:t;_classCallCheck(this,e),this.path=r,this.unescape=n,this.top_n_per_article=t,this.isfetched=!1,this.datas=null},[{key:"getIndexByWord",value:function(e,a){var i=this,l=2<arguments.length&&void 0!==arguments[2]&&arguments[2],c=[],s=new Set;return l||(a=a.toLowerCase()),e.forEach(function(e){i.unescape&&((t=document.createElement("div")).innerText=e,e=t.innerHTML);var t,r=e.length;if(0!==r){var n,o=0;for(l||(e=e.toLowerCase());-1<(n=a.indexOf(e,o));)c.push({position:n,word:e}),s.add(e),o=n+r}}),c.sort(function(e,t){return e.position!==t.position?e.position-t.position:t.word.length-e.word.length}),[c,s]}},{key:"mergeIntoSlice",value:function(e,t,r){for(var n=r[0],o=n.position,a=n.word,i=[],l=new Set;o+a.length<=t&&0!==r.length;){l.add(a),i.push({position:o,length:a.length});var c=o+a.length;for(r.shift();0!==r.length&&(o=(n=r[0]).position,a=n.word,o<c);)r.shift()}return{hits:i,start:e,end:t,count:l.size}}},{key:"highlightKeyword",value:function(e,t){var r,n="",o=t.start,a=_createForOfIteratorHelper(t.hits);try{for(a.s();!(r=a.n()).done;){var i=r.value,l=i.position,c=i.length;n+=e.substring(o,l),o=l+c,n+='<mark class="search-keyword">'.concat(e.substr(l,c),"</mark>")}}catch(e){a.e(e)}finally{a.f()}return n+e.substring(o,t.end)}},{key:"getResultItems",value:function(h){var f=this,y=[];return this.datas.forEach(function(e){var t=e.title,r=e.content,e=e.url,n=(o=_slicedToArray(f.getIndexByWord(h,t),2))[0],o=o[1],a=(i=_slicedToArray(f.getIndexByWord(h,r),2))[0],i=i[1],o=new Set([].concat(_toConsumableArray(o),_toConsumableArray(i))).size;if(0!==(i=n.length+a.length)){for(var l=[],c=(0!==n.length&&l.push(f.mergeIntoSlice(0,t.length,n)),[]);0!==a.length;){var s=a[0].position,u=Math.max(0,s-20),s=Math.min(r.length,s+100);c.push(f.mergeIntoSlice(u,s,a))}c.sort(function(e,t){return e.count!==t.count?t.count-e.count:e.hits.length!==t.hits.length?t.hits.length-e.hits.length:e.start-t.start});0<=(n=parseInt(f.top_n_per_article,10))&&(c=c.slice(0,n));var d="";(e=new URL(e,location.origin)).searchParams.append("highlight",h.join(" ")),d+=0!==l.length?'<div class="local-search-hit-item"><a href="'.concat(e.href,'"><span class="search-result-title">').concat(f.highlightKeyword(t,l[0]),"</span>"):'<div class="local-search-hit-item"><a href="'.concat(e.href,'"><span class="search-result-title">').concat(t,"</span>"),c.forEach(function(e){d+='<p class="search-result">'.concat(f.highlightKeyword(r,e),"...</p></a>")}),d+="</div>",y.push({item:d,id:y.length,hitCount:i,includedCount:o})}}),y}},{key:"fetchData",value:function(){var t=this,r=!this.path.endsWith("json");fetch(this.path).then(function(e){return e.text()}).then(function(e){t.isfetched=!0,t.datas=r?_toConsumableArray((new DOMParser).parseFromString(e,"text/xml").querySelectorAll("entry")).map(function(e){return{title:e.querySelector("title").textContent,content:e.querySelector("content").textContent,url:e.querySelector("url").textContent}}):JSON.parse(e),t.datas=t.datas.filter(function(e){return e.title}).map(function(e){return e.title=e.title.trim(),e.content=e.content?e.content.trim().replace(/<[^>]+>/g,""):"",e.url=decodeURIComponent(e.url).replace(/\/{2,}/g,"/"),e}),window.dispatchEvent(new Event("search:loaded"))})}},{key:"highlightText",value:function(t,e,r){var n,o=t.nodeValue,a=e.start,i=[],l=_createForOfIteratorHelper(e.hits);try{for(l.s();!(n=l.n()).done;){var c=n.value,s=c.position,u=c.length,d=document.createTextNode(o.substring(a,s)),a=s+u,h=document.createElement("mark");h.className=r,h.appendChild(document.createTextNode(o.substr(s,u))),i.push(d,h)}}catch(e){l.e(e)}finally{l.f()}t.nodeValue=o.substring(a,e.end),i.forEach(function(e){t.parentNode.insertBefore(e,t)})}},{key:"highlightSearchWords",value:function(e){var r=this,t=new URL(location.href).searchParams.get("highlight"),n=t?t.split(" "):[];if(n.length&&e){for(var o=document.createTreeWalker(e,NodeFilter.SHOW_TEXT,null),a=[];o.nextNode();)o.currentNode.parentNode.matches("button, select, textarea, .mermaid")||a.push(o.currentNode);a.forEach(function(e){var t=_slicedToArray(r.getIndexByWord(n,e.nodeValue),1)[0];t.length&&(t=r.mergeIntoSlice(0,e.nodeValue.length,t),r.highlightText(e,t,"search-keyword"))})}}}]);window.addEventListener("load",function(){function e(){var e=document.body.style;e.width="100%",e.overflow="hidden",btf.animateIn(f,"to_show 0.5s"),btf.animateIn(y,"titleScale 0.5s"),setTimeout(function(){c.focus()},300),h||(l.isfetched||l.fetchData(),c.addEventListener("input",d),h=!0),document.addEventListener("keydown",function e(t){"Escape"===t.code&&(m(),document.removeEventListener("keydown",e))}),p(),window.addEventListener("resize",p)}function t(){document.querySelector("#search-button > .search").addEventListener("click",e)}var r=GLOBAL_CONFIG.localSearch,n=r.path,o=r.top_n_per_article,a=r.unescape,i=r.languages,l=new LocalSearch({path:n,top_n_per_article:o,unescape:a}),c=document.querySelector("#local-search-input input"),s=document.getElementById("local-search-stats-wrap"),u=document.getElementById("loading-status"),d=function(){var e,t,r,n;l.isfetched&&(""!==(e=c.value.trim().toLowerCase())&&(u.innerHTML='<i class="fas fa-spinner fa-pulse"></i>'),n=e.split(/[-\s]+/),t=document.getElementById("local-search-results"),r=[],0<e.length&&(r=l.getResultItems(n)),1===n.length&&""===n[0]?(t.classList.add("no-result"),t.textContent=""):0===r.length?(t.textContent="",s.innerHTML='<div class="search-result-stats">'.concat(i.hits_empty.replace(/\$\{query}/,e),"</div>")):(r.sort(function(e,t){return e.includedCount!==t.includedCount?t.includedCount-e.includedCount:e.hitCount!==t.hitCount?t.hitCount-e.hitCount:t.id-e.id}),n=i.hits_stats.replace(/\$\{hits}/,r.length),t.classList.remove("no-result"),t.innerHTML='<div class="search-result-list">'.concat(r.map(function(e){return e.item}).join(""),"</div>"),s.innerHTML='<hr><div class="search-result-stats">'.concat(n,"</div>"),window.pjax&&window.pjax.refresh(t)),u.textContent="")},h=!1,f=document.getElementById("search-mask"),y=document.querySelector("#local-search .search-dialog"),p=function(){window.innerWidth<768&&y.style.setProperty("--search-height",window.innerHeight+"px")},m=function(){var e=document.body.style;e.width="",e.overflow="",btf.animateOut(y,"search_close .5s"),btf.animateOut(f,"to_hide 0.5s"),window.removeEventListener("resize",p)};window.addEventListener("search:loaded",function(){var e=document.getElementById("loading-database");e.nextElementSibling.style.display="block",e.remove()}),t(),document.querySelector("#local-search .search-close-button").addEventListener("click",m),f.addEventListener("click",m),GLOBAL_CONFIG.localSearch.preload&&l.fetchData(),l.highlightSearchWords(document.getElementById("article-container")),window.addEventListener("pjax:complete",function(){btf.isHidden(f)||m(),l.highlightSearchWords(document.getElementById("article-container")),t()})});
+window.addEventListener("load", () => {
+  let loadFlag = false;
+  let dataObj = [];
+  const $searchMask = document.getElementById("search-mask");
+
+  const openSearch = () => {
+    const bodyStyle = document.body.style;
+    bodyStyle.width = "100%";
+    bodyStyle.overflow = "hidden";
+    anzhiyu.animateIn($searchMask, "to_show 0.5s");
+    anzhiyu.animateIn(document.querySelector("#local-search .search-dialog"), "titleScale 0.5s");
+    setTimeout(() => {
+      document.querySelector("#local-search-input input").focus();
+    }, 100);
+    if (!loadFlag) {
+      search();
+      loadFlag = true;
+    }
+    // shortcut: ESC
+    document.addEventListener("keydown", function f(event) {
+      if (event.code === "Escape") {
+        closeSearch();
+        document.removeEventListener("keydown", f);
+      }
+    });
+  };
+
+  const closeSearch = () => {
+    const bodyStyle = document.body.style;
+    bodyStyle.width = "";
+    bodyStyle.overflow = "";
+    anzhiyu.animateOut(document.querySelector("#local-search .search-dialog"), "search_close .5s");
+    anzhiyu.animateOut($searchMask, "to_hide 0.5s");
+  };
+
+  const searchClickFn = () => {
+    document.querySelector("#search-button > .search").addEventListener("click", openSearch);
+    document.querySelector("#menu-search").addEventListener("click", openSearch);
+  };
+
+  const searchClickFnOnce = () => {
+    document.querySelector("#local-search .search-close-button").addEventListener("click", closeSearch);
+    $searchMask.addEventListener("click", closeSearch);
+    if (GLOBAL_CONFIG.localSearch.preload) dataObj = fetchData(GLOBAL_CONFIG.localSearch.path);
+  };
+
+  // check url is json or not
+  const isJson = url => {
+    const reg = /\.json$/;
+    return reg.test(url);
+  };
+
+  const fetchData = async path => {
+    let data = [];
+    const response = await fetch(path);
+    if (isJson(path)) {
+      data = await response.json();
+    } else {
+      const res = await response.text();
+      const t = await new window.DOMParser().parseFromString(res, "text/xml");
+      const a = await t;
+
+      data = [...a.querySelectorAll("entry")].map(item => {
+        let tagsArr = [];
+        if (item.querySelector("tags") && item.querySelector("tags").getElementsByTagName("tag")) {
+          Array.prototype.forEach.call(item.querySelector("tags").getElementsByTagName("tag"), function (item, index) {
+            tagsArr.push(item.textContent);
+          });
+        }
+        let content = item.querySelector("content") && item.querySelector("content").textContent;
+        let imgReg = /<img.*?(?:>|\/>)/gi; //匹配图片中的img标签
+        let srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i; // 匹配图片中的src
+        let arr = content.match(imgReg); //筛选出所有的img
+
+        let srcArr = [];
+        if (arr) {
+          for (let i = 0; i < arr.length; i++) {
+            let src = arr[i].match(srcReg);
+            // 获取图片地址
+            if (!src[1].indexOf("http")) srcArr.push(src[1]);
+          }
+        }
+
+        return {
+          title: item.querySelector("title").textContent,
+          content: content,
+          url: item.querySelector("url").textContent,
+          tags: tagsArr,
+          oneImage: srcArr && srcArr[0],
+        };
+      });
+    }
+    if (response.ok) {
+      const $loadDataItem = document.getElementById("loading-database");
+      $loadDataItem.nextElementSibling.style.display = "block";
+      $loadDataItem.remove();
+    }
+    return data;
+  };
+
+  const search = () => {
+    if (!GLOBAL_CONFIG.localSearch.preload) {
+      dataObj = fetchData(GLOBAL_CONFIG.localSearch.path);
+    }
+    const $input = document.querySelector("#local-search-input input");
+    const $resultContent = document.getElementById("local-search-results");
+    const $loadingStatus = document.getElementById("loading-status");
+
+    $input.addEventListener("input", function () {
+      const keywords = this.value.trim().toLowerCase().split(/[\s]+/);
+      if (keywords[0] !== "")
+        $loadingStatus.innerHTML = '<i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i>';
+
+      $resultContent.innerHTML = "";
+      let str = '<div class="search-result-list">';
+      if (keywords.length <= 0) return;
+      let count = 0;
+      // perform local searching
+      dataObj.then(data => {
+        data.forEach(data => {
+          let isMatch = true;
+          let dataTitle = data.title ? data.title.trim().toLowerCase() : "";
+          let dataTags = data.tags;
+          let oneImage = data.oneImage ?? "";
+          const dataContent = data.content
+            ? data.content
+                .trim()
+                .replace(/<[^>]+>/g, "")
+                .toLowerCase()
+            : "";
+          const dataUrl = data.url.startsWith("/") ? data.url : GLOBAL_CONFIG.root + data.url;
+          let indexTitle = -1;
+          let indexContent = -1;
+          let firstOccur = -1;
+          // only match articles with not empty titles and contents
+          if (dataTitle !== "" || dataContent !== "") {
+            keywords.forEach((keyword, i) => {
+              indexTitle = dataTitle.indexOf(keyword);
+              indexContent = dataContent.indexOf(keyword);
+              if (indexTitle < 0 && indexContent < 0) {
+                isMatch = false;
+              } else {
+                if (indexContent < 0) {
+                  indexContent = 0;
+                }
+                if (i === 0) {
+                  firstOccur = indexContent;
+                }
+              }
+            });
+          } else {
+            isMatch = false;
+          }
+
+          // show search results
+          if (isMatch) {
+            if (firstOccur >= 0) {
+              // cut out 130 characters
+              // let start = firstOccur - 30 < 0 ? 0 : firstOccur - 30
+              // let end = firstOccur + 50 > dataContent.length ? dataContent.length : firstOccur + 50
+              let start = firstOccur - 30;
+              let end = firstOccur + 100;
+              let pre = "";
+              let post = "";
+
+              if (start < 0) {
+                start = 0;
+              }
+
+              if (start === 0) {
+                end = 100;
+              } else {
+                pre = "...";
+              }
+
+              if (end > dataContent.length) {
+                end = dataContent.length;
+              } else {
+                post = "...";
+              }
+
+              let matchContent = dataContent.substring(start, end);
+
+              // highlight all keywords
+              keywords.forEach(keyword => {
+                const regS = new RegExp(keyword, "gi");
+                matchContent = matchContent.replace(regS, '<span class="search-keyword">' + keyword + "</span>");
+                dataTitle = dataTitle.replace(regS, '<span class="search-keyword">' + keyword + "</span>");
+              });
+
+              str += '<div class="local-search__hit-item">';
+              if (oneImage) {
+                str += `<div class="search-left"><img src=${oneImage} alt=${dataTitle} data-fancybox='gallery'>`;
+              } else {
+                str += '<div class="search-left" style="width:0">';
+              }
+
+              str += "</div>";
+
+              if (oneImage) {
+                str +=
+                  '<div class="search-right"><a href="' +
+                  dataUrl +
+                  '" class="search-result-title">' +
+                  dataTitle +
+                  "</a>";
+              } else {
+                str +=
+                  '<div class="search-right" style="width: 100%"><a href="' +
+                  dataUrl +
+                  '" class="search-result-title">' +
+                  dataTitle +
+                  "</a>";
+              }
+
+              count += 1;
+
+              if (dataContent !== "") {
+                str +=
+                  '<p class="search-result" onclick="pjax.loadUrl(`' +
+                  dataUrl +
+                  '`)">' +
+                  pre +
+                  matchContent +
+                  post +
+                  "</p>";
+              }
+              if (dataTags.length) {
+                str += '<div class="search-result-tags">';
+
+                for (let i = 0; i < dataTags.length; i++) {
+                  const element = dataTags[i].trim();
+
+                  str +=
+                    '<a class="tag-list" href="/tags/' +
+                    element +
+                    '/" data-pjax-state="" one-link-mark="yes">#' +
+                    element +
+                    "</a>";
+                }
+
+                str += "</div>";
+              }
+            }
+            str += "</div></div>";
+          }
+        });
+        if (count === 0) {
+          str +=
+            '<div id="local-search__hits-empty">' +
+            GLOBAL_CONFIG.localSearch.languages.hits_empty.replace(/\$\{query}/, this.value.trim()) +
+            "</div>";
+        }
+        str += "</div>";
+        $resultContent.innerHTML = str;
+        if (keywords[0] !== "") $loadingStatus.innerHTML = "";
+        window.pjax && window.pjax.refresh($resultContent);
+      });
+    });
+  };
+
+  searchClickFn();
+  searchClickFnOnce();
+
+  // pjax
+  window.addEventListener("pjax:complete", () => {
+    !anzhiyu.isHidden($searchMask) && closeSearch();
+    searchClickFn();
+  });
+});
